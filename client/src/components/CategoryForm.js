@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './FormStyles.css';
 
 const CategoryForm = () => {
   const [name, setName] = useState('');
