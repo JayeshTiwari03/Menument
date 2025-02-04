@@ -6,13 +6,13 @@ const BeverageList = () => {
   const [beverages, setBeverages] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/beverages').then((response) => {
+    axios.get('http://localhost:5000/api/beverages').then((response) => {
       setBeverages(response.data);
     });
   }, []);
 
   return (
-    <div>
+    <div className='list-container'>
       <h2>Beverages</h2>
       {beverages.map((beverage) => (
         <div key={beverage._id}>

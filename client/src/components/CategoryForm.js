@@ -7,23 +7,26 @@ const CategoryForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post('/api/categories', { name });
+    await axios.post('http://localhost:5000/api/categories', { name });
     alert('Category added!');
     setName('');
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Add Category</h2>
-      <input
-        type="text"
-        placeholder="Category Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
-      />
-      <button type="submit">Add Category</button>
-    </form>
+    <div className='form-container'>
+
+      <form onSubmit={handleSubmit}>
+        <h2>Add Category</h2>
+        <input
+          type="text"
+          placeholder="Category Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+        <button type="submit">Add Category</button>
+      </form>
+    </div>
   );
 };
 

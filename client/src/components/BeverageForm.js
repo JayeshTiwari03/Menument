@@ -29,44 +29,47 @@ const BeverageForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Add Beverage</h2>
-      <input
-        type="text"
-        placeholder="Name"
-        value={formData.name}
-        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-        required
-      />
-      <input
-        type="text"
-        placeholder="Description"
-        value={formData.description}
-        onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-        required
-      />
-      <input
-        type="number"
-        placeholder="Price"
-        value={formData.price}
-        onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-        required
-      />
-      <label>
+    <div className='form-container'>
+
+      <form onSubmit={handleSubmit}>
+        <h2>Add Beverage</h2>
         <input
-          type="checkbox"
-          checked={formData.isAlcoholic}
-          onChange={(e) => setFormData({ ...formData, isAlcoholic: e.target.checked })}
+          type="text"
+          placeholder="Name"
+          value={formData.name}
+          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          required
         />
-        Alcoholic
-      </label>
-      <input
-        type="file"
-        onChange={(e) => setFormData({ ...formData, photo: e.target.files[0] })}
-        required
-      />
-      <button type="submit">Add Beverage</button>
-    </form>
+        <input
+          type="text"
+          placeholder="Description"
+          value={formData.description}
+          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+          required
+        />
+        <input
+          type="number"
+          placeholder="Price"
+          value={formData.price}
+          onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+          required
+        />
+        <label>
+          <input
+            type="checkbox"
+            checked={formData.isAlcoholic}
+            onChange={(e) => setFormData({ ...formData, isAlcoholic: e.target.checked })}
+          />
+          Alcoholic
+        </label>
+        <input
+          type="file"
+          onChange={(e) => setFormData({ ...formData, photo: e.target.files[0] })}
+          required
+        />
+        <button type="submit">Add Beverage</button>
+      </form>
+    </div>
   );
 };
 

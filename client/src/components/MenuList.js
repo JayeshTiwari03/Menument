@@ -6,13 +6,13 @@ const MenuList = () => {
     const [menuItems, setMenuItems] = useState([]);
 
     useEffect(() => {
-        axios.get('/api/menu').then((response) => {
+        axios.get('http://localhost:5000/api/menu').then((response) => {
             setMenuItems(response.data);
         });
     }, []);
 
     return (
-        <div>
+        <div className='list-container'>
             <h2>Menu</h2>
             <div className="list-container fade-in">
                 {menuItems.map((item) => (
@@ -21,7 +21,7 @@ const MenuList = () => {
                         <h3>{item.name}</h3>
                         <p>{item.description}</p>
                         <p>Price: ${item.price}</p>
-                        <p>{item.isVeg ? 'Vegetarian' : 'Non-Vegetarian'}</p>
+                        <p>{item.isVeg ? 'Available' : 'Unavailable'}</p>
                     </div>
                 ))}
             </div>
