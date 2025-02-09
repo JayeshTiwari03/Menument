@@ -1,9 +1,9 @@
-const express = require('express');
-// const Category = require('../models/Category'); // Import the Category model
+const express = require("express");
+const Category = require("../models/CategoryList"); // Import the Category model
 const router = express.Router();
 
 // GET all categories
-router.get('/', async (req, res) => {
+router.get("/getCategories", async (req, res) => {
   try {
     const categories = await Category.find();
     res.json(categories);
@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
 });
 
 // POST a new category
-router.post('/', async (req, res) => {
+router.post("/saveCategory", async (req, res) => {
   const category = new Category({
     name: req.body.name,
   });

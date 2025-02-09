@@ -3,7 +3,7 @@ const MenuItem = require('../models/MenuItem'); // Import the MenuItem model
 const router = express.Router();
 
 // GET all menu items
-router.get('/menu', async (req, res) => {
+router.get('/getMenu', async (req, res) => {
   try {
     const menuItems = await MenuItem.find();
     res.json(menuItems);
@@ -13,7 +13,7 @@ router.get('/menu', async (req, res) => {
 });
 
 // POST a new menu item
-router.post('/menuItem', async (req, res) => {
+router.post('/saveMenuItem', async (req, res) => {
   const menuItem = new MenuItem({
     name: req.body.name,
     description: req.body.description,

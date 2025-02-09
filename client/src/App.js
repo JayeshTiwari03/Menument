@@ -6,7 +6,7 @@ import MenuItemForm from './components/MenuItemForm';
 import BeverageForm from './components/BeverageForm';
 import MenuList from './components/MenuList';
 import BeverageList from './components/BeverageList';
-import Footer from './components/Footer';
+// import Footer from './components/Footer';
 import './App.css';
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
         <Route path="/menu" element={<MenuList />} />
         <Route path="/beverages" element={<BeverageList />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </Router>
   );
 }

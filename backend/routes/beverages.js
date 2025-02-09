@@ -1,9 +1,9 @@
-const express = require('express');
-// const Beverage = require('../models/Beverage'); // Import the Beverage model
+const express = require("express");
+const Beverage = require("../models/BeverageList");
 const router = express.Router();
 
 // GET all beverages
-router.get('/', async (req, res) => {
+router.get("/getBeverages", async (req, res) => {
   try {
     const beverages = await Beverage.find();
     res.json(beverages);
@@ -13,12 +13,12 @@ router.get('/', async (req, res) => {
 });
 
 // POST a new beverage
-router.post('/', async (req, res) => {
+router.post("/saveBeverage", async (req, res) => {
   const beverage = new Beverage({
     name: req.body.name,
     description: req.body.description,
     price: req.body.price,
-    isAlcoholic: req.body.isAlcoholic,
+    isAlcohol: req.body.isAlcohol,
     photo: req.body.photo,
   });
 

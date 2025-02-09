@@ -1,15 +1,24 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import axios from 'axios';
 import './FormStyles.css';
 
 const CategoryForm = () => {
   const [name, setName] = useState('');
+  const categoryRef = useRef();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    await axios.post('http://localhost:5000/api/categories', { name });
-    alert('Category added!');
-    setName('');
+    try{
+      e.preventDefault();
+      await axios.post('http://localhost:5000/api/saveCategory', { name });
+      alert('Category added!');
+      setName('');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleClick = () => {
+    categoryRef.current.focus(); // Focus the input field
   };
 
   return (
@@ -22,9 +31,10 @@ const CategoryForm = () => {
           placeholder="Category Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          ref={categoryRef}
           required
         />
-        <button type="submit">Add Category</button>
+        <button type="submit" onClick={handleClick}>Add Category</button>
       </form>
     </div>
   );

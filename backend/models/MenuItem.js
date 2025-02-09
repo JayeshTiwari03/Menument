@@ -3,10 +3,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Define the MenuItem schema
-const menuItemSchema = new mongoose.Schema({
+const menuItemSchema = new Schema({
   name: {
     type: String,
-    required: false,
+    required: true,
     trim: true,
   },
   description: {
@@ -15,13 +15,13 @@ const menuItemSchema = new mongoose.Schema({
   },
   price: {
     type: Number,
-    required: false,
+    required: true,
     min: 0,
   },
   category: {
     type: String,
     required: false,
-    enum: ['Appetizer', 'Main Course', 'Dessert', 'Beverage'],
+    // enum: ['Appetizer', 'Main Course', 'Dessert', 'Beverage'],
   },
   isAvailable: {
     type: Boolean,

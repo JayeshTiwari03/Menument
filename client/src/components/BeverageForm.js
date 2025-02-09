@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import './FormStyles.css';
+import React, { useState } from "react";
+import axios from "axios";
+import "./FormStyles.css";
 
 const BeverageForm = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-    price: '',
-    isAlcoholic: false,
+    name: "",
+    description: "",
+    price: "",
+    isAlcohol: false,
     photo: null,
   });
 
@@ -17,20 +17,20 @@ const BeverageForm = () => {
     for (const key in formData) {
       data.append(key, formData[key]);
     }
-    await axios.post('/api/beverages', data);
-    alert('Beverage added!');
+    console.log(data);
+    await axios.post("http://localhost:5000/api/saveBeverage", data);
+    alert("Beverage added!");
     setFormData({
-      name: '',
-      description: '',
-      price: '',
-      isAlcoholic: false,
+      name: "",
+      description: "",
+      price: "",
+      isAlcohol: false,
       photo: null,
     });
   };
 
   return (
-    <div className='form-container'>
-
+    <div className="form-container">
       <form onSubmit={handleSubmit}>
         <h2>Add Beverage</h2>
         <input
@@ -44,7 +44,9 @@ const BeverageForm = () => {
           type="text"
           placeholder="Description"
           value={formData.description}
-          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+          onChange={(e) =>
+            setFormData({ ...formData, description: e.target.value })
+          }
           required
         />
         <input
@@ -57,14 +59,18 @@ const BeverageForm = () => {
         <label>
           <input
             type="checkbox"
-            checked={formData.isAlcoholic}
-            onChange={(e) => setFormData({ ...formData, isAlcoholic: e.target.checked })}
+            checked={formData.isAlcohol}
+            onChange={(e) =>
+              setFormData({ ...formData, isAlcohol: e.target.checked })
+            }
           />
-          Alcoholic
+          Alcohol
         </label>
         <input
           type="file"
-          onChange={(e) => setFormData({ ...formData, photo: e.target.files[0] })}
+          onChange={(e) =>
+            setFormData({ ...formData, photo: e.target.files[0] })
+          }
           required
         />
         <button type="submit">Add Beverage</button>
