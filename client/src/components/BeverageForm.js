@@ -14,11 +14,19 @@ const BeverageForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData();
-    for (const key in formData) {
-      data.append(key, formData[key]);
+    const dataToSubmit = {
+      ...formData,
+      price: parseFloat(formData.price),
+    };
+
+    console.log("Form Data before submission:", dataToSubmit);
+
+    // Log FormData correctly
+    for (let [key, value] of data.entries()) {
+      console.log(key, value);
     }
-    console.log(data);
-    await axios.post("http://localhost:5000/api/saveBeverage", data);
+
+    await axios.post("http://localhost:5000/api/saveBeverage", dataToSubmit);
     alert("Beverage added!");
     setFormData({
       name: "",
