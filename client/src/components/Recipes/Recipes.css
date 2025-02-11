@@ -1,0 +1,11 @@
+.recipe-container {
+    max-width: 400px;
+    margin: auto;
+    margin-top: 60px;
+}
+
+.results-container {
+    max-height: 400px;
+    border: 1px solid grey;
+    overflow-x: scroll;
+}

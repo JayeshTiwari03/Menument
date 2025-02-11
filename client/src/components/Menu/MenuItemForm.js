@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
-import "./FormStyles.css";
+import "../FormStyles.css";
 
 const MenuItemForm = () => {
   const [formData, setFormData] = useState({

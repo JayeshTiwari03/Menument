@@ -56,7 +56,6 @@ module.exports = {
     // Extract CSS into separate files
     new MiniCssExtractPlugin({
       filename: "[name].[contenthash].css",
-      vico,
     }),
   ],
   optimization: {
