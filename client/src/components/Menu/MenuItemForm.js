@@ -97,7 +97,7 @@ const MenuItemForm = () => {
               setFormData({ ...formData, isAvailable: e.target.checked })
             }
           />
-          isAvailable?
+          Available?
         </label>
         <input
           type="file"
