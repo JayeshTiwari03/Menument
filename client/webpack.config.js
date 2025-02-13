@@ -5,6 +5,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.js", // Entry point
+  devtool: "eval-source-map",
   output: {
     path: path.resolve(__dirname, "dist"), // Output directory
     filename: "[name].[contenthash].js", // Output file name with hashing
@@ -32,7 +33,18 @@ module.exports = {
       // Rule for CSS files
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                auto: true, // Enable CSS modules for files matching *.module.css
+                localIdentName: "[name]__[local]--[hash:base64:5]", // Custom class name format
+              },
+            },
+          },
+        ],
       },
       // Rule for SCSS files
       {

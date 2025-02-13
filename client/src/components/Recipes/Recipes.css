@@ -1,11 +1,39 @@
 .recipe-container {
-    max-width: 400px;
-    margin: auto;
-    margin-top: 60px;
+  max-width: 400px;
+  margin: auto;
+  margin-top: 60px;
 }
 
 .results-container {
-    max-height: 400px;
-    border: 1px solid grey;
-    overflow-x: scroll;
+  max-height: 400px;
+  overflow-x: scroll;
+  border-radius: 5px;
+  padding: 0 10px 10px 0;
+  margin: -10px 0;
+  border: 1px solid #ccc;
+  position: absolute;
+  background-color: #ccc;
+  z-index: 100;
+  min-width: 390px;
+}
+
+.results-container div {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.results-container div:hover {
+  background-color: beige;
+  cursor: pointer;
+}
+
+.recipes-list {
+  padding: 0;
+}
+
+.recipes-list li {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
