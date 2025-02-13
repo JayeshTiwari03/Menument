@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ShowRecipe from "./ShowRecipe";
+import ShimmerList from "../Shimmers/ShimmerList";
 import "./Recipes.css";
 
 const SearchRecipes = () => {
@@ -10,16 +11,20 @@ const SearchRecipes = () => {
   const [cache, setCache] = useState([]);
   const [showRecipe, setShowRecipe] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(fetchRecipes, 1000);
+    setLoading(true);
 
     return () => {
       clearTimeout(timer);
+      setLoading(false);
     };
   }, [query]);
 
   const fetchRecipes = () => {
+    setLoading(true);
     if (cache[query]) {
       setResults(cache[query]);
       return;
@@ -33,6 +38,7 @@ const SearchRecipes = () => {
           setResults(data);
           setCache((prev) => ({ ...prev, [query]: data }));
         });
+      setLoading(false);
     } catch (error) {
       console.log("Failed", error);
     }
@@ -42,9 +48,8 @@ const SearchRecipes = () => {
     setQuery(e.target.value);
   };
 
-  const handleRecipe = (ingredients, instructions) => {
+  const handleRecipe = (recipe) => {
     setShowRecipe(true);
-    let recipe = new Array({ ...ingredients }, { ...instructions });
     console.log("rec obj?", recipe);
     setSelectedRecipe(recipe);
     setShowResults(false);
@@ -59,23 +64,25 @@ const SearchRecipes = () => {
         onClick={() => setShowResults(true)}
         // onBlur={() => setShowResults(false)}
       />
-      {showResults && (
-        <>
-          <div className="results-container">
-            {results?.map((result) => (
-              <div
-                className="result"
-                key={result.id}
-                onClick={() =>
-                  handleRecipe(result.ingredients, result.instructions)
-                }
-              >
-                {result.name}
-              </div>
-            ))}
-          </div>
-        </>
-      )}
+      {showResults ? (
+        loading ? (
+          <ShimmerList />
+        ) : (
+          <>
+            <div className="results-container">
+              {results?.map((result) => (
+                <div
+                  className="result"
+                  key={result.id}
+                  onClick={() => handleRecipe(result)}
+                >
+                  {result.name}
+                </div>
+              ))}
+            </div>
+          </>
+        )
+      ) : null}
       {showRecipe && <ShowRecipe recipe={selectedRecipe} />}
     </div>
   );

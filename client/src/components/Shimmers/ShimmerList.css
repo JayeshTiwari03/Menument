@@ -1,0 +1,46 @@
+.shimmer-container {
+  min-height: 330px;
+  border-radius: 5px;
+  /* padding: 0 10px 10px 0; */
+  margin: -10px 0;
+  border: 1px solid #ccc;
+  position: absolute;
+  background-color: #ccc;
+  z-index: 100;
+  min-width: 790px;
+  overflow: hidden;
+}
+
+.shimmer-container div {
+  padding: 8px 0px 12px 0px;
+}
+
+.shimmer-list:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(227 225 225 / 60%),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    left: 100%;
+  }
+}
+
+.shimmer-row {
+  width: 95%;
+  height: 15px;
+  background: #e0e0e0;
+  margin: 0px auto;
+  border-radius: 4px;
+}
