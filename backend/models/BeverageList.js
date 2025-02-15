@@ -24,6 +24,10 @@ const beverageSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  photo: {
+    type: String,
+    required: true,
+  },
 });
 
 const Beverage = mongoose.model("Beverage", beverageSchema);

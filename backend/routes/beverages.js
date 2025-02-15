@@ -1,6 +1,7 @@
 const express = require("express");
 const Beverage = require("../models/BeverageList");
 const router = express.Router();
+const upload = require("../images/multer");
 
 // GET all beverages
 router.get("/getBeverages", async (req, res) => {
@@ -13,13 +14,13 @@ router.get("/getBeverages", async (req, res) => {
 });
 
 // POST a new beverage
-router.post("/saveBeverage", async (req, res) => {
+router.post("/saveBeverage", upload.single("photo"), async (req, res) => {
   const beverage = new Beverage({
     name: req.body.name,
     description: req.body.description,
     price: req.body.price,
     isAlcohol: req.body.isAlcohol,
-    photo: req.body.photo,
+    photo: req.file.path,
   });
 
   try {
