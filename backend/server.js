@@ -26,29 +26,9 @@ mongoose
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Routes
-// app.use('/api/categories', require('./routes/categories'));
-// app.use('/api/menu', require('./routes/menu'));
-
 app.use("/api", menuItemRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", beverageRoutes);
-
-// app.use('/api/beverages', require('./routes/beverages'));
-
-// API Routes
-// app.get('/api/menu', (req, res) => {
-//     res.json({ message: 'Hello from BE - Menu' });
-// }
-// )
-// app.get('/api/beverages', (req, res) => {
-//     res.json({ message: 'Hello from BE - Beverage' });
-// })
-
-// app.post('api/categories', (req, res) => {
-//     let name = req.body.name;
-//     res.json({ message: `Category saved ${name}` });
-// })
 
 app.listen(PORT, (err) => {
   if (err) {

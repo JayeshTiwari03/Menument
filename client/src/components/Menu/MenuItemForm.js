@@ -21,11 +21,16 @@ const MenuItemForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const dataToSubmit = {
-      ...formData,
-      price: parseFloat(formData.price),
-    };
-    await axios.post("http://localhost:5000/api/saveMenuItem", dataToSubmit);
+
+    const data = new FormData();
+    data.append("name", formData.name);
+    data.append("description", formData.description);
+    data.append("price", formData.price);
+    data.append("category", formData.category);
+    data.append("isAvailable", formData.isAvailable);
+    data.append("photo", formData.photo);
+
+    await axios.post("http://localhost:5000/api/saveMenuItem", data);
     alert("Menu item added!");
     navigate("/menu");
     setFormData({
@@ -47,6 +52,10 @@ const MenuItemForm = () => {
     } catch (error) {
       console.log("Error getting categories", error);
     }
+  };
+
+  const handleFileChange = (e) => {
+    setFormData({ ...formData, photo: e.target.files[0] });
   };
 
   return (
@@ -101,9 +110,12 @@ const MenuItemForm = () => {
         </label>
         <input
           type="file"
-          onChange={(e) =>
-            setFormData({ ...formData, photo: e.target.files[0] })
-          }
+          // accept="image/*"
+          name="photo"
+          // onChange={(e) =>
+          //   setFormData({ ...formData, photo: e.target.files[0] })
+          // }
+          onChange={handleFileChange}
           required
         />
         <button type="submit">Add Menu Item</button>

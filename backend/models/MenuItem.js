@@ -1,5 +1,5 @@
 // models/MenuItem.js
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // Define the MenuItem schema
@@ -31,10 +31,14 @@ const menuItemSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  photo: {
+    type: String,
+    required: true,
+  },
 });
 
 // Create the MenuItem model
-const MenuItem = mongoose.model('MenuItem', menuItemSchema);
+const MenuItem = mongoose.model("MenuItem", menuItemSchema);
 
 // Export the model
 module.exports = MenuItem;

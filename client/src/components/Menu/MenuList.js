@@ -6,9 +6,14 @@ const MenuList = () => {
   const [menuItems, setMenuItems] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/getMenu").then((response) => {
-      setMenuItems(response.data);
-    });
+    axios
+      .get("http://localhost:5000/api/getMenu")
+      .then((response) => {
+        setMenuItems(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
 
   return (
@@ -17,7 +22,11 @@ const MenuList = () => {
       <div className="list-container fade-in">
         {menuItems.map((item) => (
           <div className="card" key={item._id}>
-            <img src={`http://localhost:5000/${item.photo}`} alt={item.name} />
+            <img
+              src={`http://localhost:5000/${item.photo}`}
+              alt={item.name}
+              width="100"
+            />
             <h3>{item.name}</h3>
             <p>{item.description}</p>
             <p>Price: ${item.price}</p>
