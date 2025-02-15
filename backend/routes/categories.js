@@ -26,4 +26,14 @@ router.post("/saveCategory", async (req, res) => {
   }
 });
 
+router.put("/editCategory", async (req, res) => {
+  // id
+  const { name, _id } = req.body;
+
+  const category = await Category.findById(_id);
+  category.name = name;
+  const updatedCategory = await category.save();
+  res.json(updatedCategory);
+});
+
 module.exports = router;

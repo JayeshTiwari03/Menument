@@ -1,0 +1,7 @@
+.category-list {
+  cursor: pointer;
+}
+
+.category-list:hover {
+  background-color: bisque;
+}
