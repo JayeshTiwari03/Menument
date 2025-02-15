@@ -1,12 +1,16 @@
-import React from 'react';
-import './Footer.css';
+import React, { useEffect, useState } from "react";
+import "./Footer.css";
 
 const Footer = () => {
-  return (
-    <footer className="footer">
-      <p>&copy; 2025 Restaurant Menu App. All rights reserved.</p>
-    </footer>
-  );
+  const renderFooter = () => {
+    return (
+      <footer className="footer">
+        <p>&copy; 2025 Restaurant Menu App. All rights reserved. </p>
+      </footer>
+    );
+  };
+
+  return <>{renderFooter()}</>;
 };
 
 export default Footer;

@@ -1,13 +1,37 @@
 /* Global Styles */
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f4f4f9;
   color: #333;
 }
 
-h1, h2, h3 {
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.main-content {
+  flex-grow: 1; /* Pushes footer to the bottom */
+}
+
+h1,
+h2,
+h3 {
   color: #2c3e50;
 }
 
@@ -30,7 +54,9 @@ button:hover {
   background-color: #2980b9;
 }
 
-input, textarea, select {
+input,
+textarea,
+select {
   width: 100%;
   padding: 10px;
   margin: 10px 0;

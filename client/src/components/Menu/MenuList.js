@@ -6,6 +6,10 @@ const MenuList = () => {
   const [menuItems, setMenuItems] = useState([]);
 
   useEffect(() => {
+    fetchMenuItems();
+  }, []);
+
+  const fetchMenuItems = () => {
     axios
       .get("http://localhost:5000/api/getMenu")
       .then((response) => {
@@ -14,7 +18,7 @@ const MenuList = () => {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  };
 
   return (
     <div className="list-container">
