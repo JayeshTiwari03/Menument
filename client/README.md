@@ -68,3 +68,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+// TODO:
+// Add a custom hook
+// Add keyboard navigation for autocomplete options ACCESSIBILITY
+// Explore HOC
+// Make the Edit Category Work
+    // Try toggling to an input when user clicks on edit button next to category name - or use promt box first to test
+    // Put the data to the API

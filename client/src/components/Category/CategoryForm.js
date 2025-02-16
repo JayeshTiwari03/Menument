@@ -6,7 +6,10 @@ import "./CategoryList.css";
 const CategoryForm = () => {
   const [name, setName] = useState("");
   const [categories, setCategories] = useState([]);
+  const [showInput, setShowInput] = useState({});
+  const [editedCategory, setEditedCategory] = useState("");
 
+  console.log("showInput", showInput);
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -31,11 +34,19 @@ const CategoryForm = () => {
       .catch((error) => console.log(error));
   };
 
-  const handleEditCategory = (name, id) => {
+  const handleEditCategory = (id) => {
+    if (editedCategory.length === 0) {
+      return;
+    }
+
     axios
-      .put("http://localhost:5000/api/editCategory", { name, _id: id })
+      .put("http://localhost:5000/api/editCategory", {
+        name: editedCategory,
+        _id: id,
+      })
       .then((res) => {
         setCategories(...categories.push(res.data));
+        setShowInput(false);
       })
       .catch((error) => console.log(error));
   };
@@ -53,15 +64,43 @@ const CategoryForm = () => {
         />
         <button type="submit">Add Category</button>
       </form>
-      <div className="list-categories">
-        List of Categories:
-        {categories?.map((category) => (
-          <div
-            key={category._id}
-            className="category-list"
-            onClick={() => handleEditCategory(category.name, category._id)}
-          >
-            {category.name}
+      <div className="categories-list-container">
+        <h2>Categories:</h2>
+        {categories?.map(({ _id, name }) => (
+          <div className="list-container" key={_id}>
+            {showInput?.[_id] ? (
+              <form>
+                <input
+                  type="text"
+                  placeholder="Category Name"
+                  onChange={(e) => setEditedCategory(e.target.value)}
+                  required
+                  value={editedCategory}
+                />
+                <button type="submit" onClick={() => handleEditCategory(_id)}>
+                  Save
+                </button>
+              </form>
+            ) : (
+              <div key={_id} className="category-list">
+                {name}
+              </div>
+            )}
+            <button
+              onClick={() =>
+                setShowInput((prev) => {
+                  if (!prev[_id]) {
+                    setEditedCategory(name);
+                  }
+                  return {
+                    ...prev,
+                    [_id]: !prev[_id],
+                  };
+                })
+              }
+            >
+              {showInput?.[_id] ? "Cancel" : "Edit"}
+            </button>
           </div>
         ))}
       </div>
