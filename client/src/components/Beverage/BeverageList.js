@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setBeverageData, isLoading } from "../../store/slices/beveragesSlice";
@@ -8,6 +8,8 @@ const BeverageList = () => {
   // const [beverages, setBeverages] = useState([]);
   const beverageData = useSelector((state) => state.beverage.apiData);
   const dispatch = useDispatch();
+
+  const beverageItem = useMemo(() => beverageData, [beverageData]);
 
   useEffect(() => {
     if (beverageData.length === 0) {
@@ -31,19 +33,21 @@ const BeverageList = () => {
   return (
     <div className="list-container">
       <h2>Beverages</h2>
-      {beverageData?.map((beverage) => (
-        <div key={beverage._id}>
-          <h3>{beverage.name}</h3>
-          <p>{beverage.description}</p>
-          <p>Price: ${beverage.price}</p>
-          <p>{beverage.isAlcoholic ? "Alcoholic" : "Non-Alcoholic"}</p>
-          <img
-            src={`http://localhost:5000/${beverage.photo}`}
-            alt={beverage.name}
-            width="100"
-          />
-        </div>
-      ))}
+      <div className="list-container fade-in">
+        {beverageItem?.map((beverage) => (
+          <div key={beverage._id} className="card">
+            <h3>{beverage.name}</h3>
+            <p>{beverage.description}</p>
+            <p>Price: ${beverage.price}</p>
+            <p>{beverage.isAlcoholic ? "Alcoholic" : "Non-Alcoholic"}</p>
+            <img
+              src={`http://localhost:5000/${beverage.photo}`}
+              alt={beverage.name}
+              width="100"
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

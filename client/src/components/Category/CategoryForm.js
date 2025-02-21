@@ -1,23 +1,38 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { connect } from "react-redux";
+import {
+  setCategoryData,
+  setLoadingCategories,
+} from "../../store/oldRedux/categoryReducers";
 import "../FormStyles.css";
 import "./CategoryList.css";
 
-const CategoryForm = () => {
+const CategoryForm = ({
+  isLoading,
+  categoryData,
+  setCategoryData,
+  setLoadingCategories,
+}) => {
   const [name, setName] = useState("");
-  const [categories, setCategories] = useState([]);
+  // const [categories, setCategories] = useState([]);
   const [showInput, setShowInput] = useState({});
   const [editedCategory, setEditedCategory] = useState("");
 
-  console.log("showInput", showInput);
   useEffect(() => {
-    fetchCategories();
-  }, []);
+    if (categoryData.length === 0) {
+      fetchCategories();
+    }
+  }, [categoryData]);
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      await axios.post("http://localhost:5000/api/saveCategory", { name });
+      await axios
+        .post("http://localhost:5000/api/saveCategory", { name })
+        .then((res) => {
+          setCategoryData([...categoryData, res.data]);
+        });
       alert("Category added!");
       setName("");
     } catch (error) {
@@ -26,10 +41,13 @@ const CategoryForm = () => {
   };
 
   const fetchCategories = async () => {
+    setLoadingCategories(true);
     axios
       .get("http://localhost:5000/api/getCategories")
       .then((res) => {
-        setCategories(res.data);
+        // setCategories(res.data);
+        setCategoryData(res.data);
+        setLoadingCategories(false);
       })
       .catch((error) => console.log(error));
   };
@@ -45,8 +63,12 @@ const CategoryForm = () => {
         _id: id,
       })
       .then((res) => {
-        setCategories(...categories.push(res.data));
-        setShowInput(false);
+        // setCategories([...categories, res.data]);
+        const updatedCategories = categoryData.map((category) =>
+          category._id === id ? res.data : category
+        );
+        setCategoryData(updatedCategories);
+        setShowInput((prev) => ({ ...prev, [id]: false }));
       })
       .catch((error) => console.log(error));
   };
@@ -66,7 +88,7 @@ const CategoryForm = () => {
       </form>
       <div className="categories-list-container">
         <h2>Categories:</h2>
-        {categories?.map(({ _id, name }) => (
+        {categoryData?.map(({ _id, name }) => (
           <div className="list-container" key={_id}>
             {showInput?.[_id] ? (
               <form>
@@ -108,4 +130,20 @@ const CategoryForm = () => {
   );
 };
 
-export default CategoryForm;
+const mapStateToProps = (state) => ({
+  isLoading: state.category.loading,
+  categoryData: state.category.apiData,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setCategoryData: (data) => dispatch(setCategoryData(data)),
+  setLoadingCategories: (status) => dispatch(setLoadingCategories(status)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryForm);
+
+// create actions
+// create reducers
+// call the reducer in rootReducer
+// make dispatch call to save apidata
+// use the data from the store

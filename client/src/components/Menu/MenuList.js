@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { isLoading, setMenuData } from "../../store/slices/menuSlice";
 import axios from "axios";
 import "../ListStyles.css";
 
 const MenuList = () => {
-  const [menuItems, setMenuItems] = useState([]);
+  // const [menuItems, setMenuItems] = useState([]);
   const menuData = useSelector((state) => state.menu.apiData);
   const loading = useSelector((state) => state.menu.loading);
   const dispatch = useDispatch();
 
-  console.log("menuData", menuData);
-  console.log("loading", loading);
+
+  const menuItems = useMemo(() => menuData, [menuData]);
 
   useEffect(() => {
     if (menuData.length === 0) {
@@ -37,7 +37,7 @@ const MenuList = () => {
     <div className="list-container">
       <h2>Menu</h2>
       <div className="list-container fade-in">
-        {menuData.map((item) => (
+        {menuItems?.map((item) => (
           <div className="card" key={item._id}>
             <img
               src={`http://localhost:5000/${item.photo}`}
