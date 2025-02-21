@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { setBeverageData } from "../../store/slices/beveragesSlice";
+import { useDispatch } from "react-redux";
 import "../FormStyles.css";
 
 const BeverageForm = () => {
@@ -10,6 +12,7 @@ const BeverageForm = () => {
     isAlcohol: false,
     photo: null,
   });
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,7 +24,10 @@ const BeverageForm = () => {
     data.append("isAlcohol", formData.isAlcohol);
     data.append("photo", formData.photo);
 
-    await axios.post("http://localhost:5000/api/saveBeverage", data);
+    await axios
+      .post("http://localhost:5000/api/saveBeverage", data)
+      .then((response) => dispatch(setBeverageData(response.data)));
+
     alert("Beverage added!");
     setFormData({
       name: "",

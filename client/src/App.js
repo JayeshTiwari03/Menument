@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router";
 import Navbar from "./components/Navbar/Navbar";
 import CategoryForm from "./components/Category/CategoryForm";

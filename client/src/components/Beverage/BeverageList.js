@@ -1,24 +1,37 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { setBeverageData, isLoading } from "../../store/slices/beveragesSlice";
 import "../ListStyles.css";
 
 const BeverageList = () => {
-  const [beverages, setBeverages] = useState([]);
+  // const [beverages, setBeverages] = useState([]);
+  const beverageData = useSelector((state) => state.beverage.apiData);
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    if (beverageData.length === 0) {
+      fetchBeverageData();
+    }
+  }, [beverageData]);
+
+  const fetchBeverageData = () => {
+    dispatch(isLoading(true));
     try {
       axios.get("http://localhost:5000/api/getBeverages").then((response) => {
-        setBeverages(response.data);
+        // setBeverages(response.data);
+        dispatch(setBeverageData(response.data));
+        dispatch(isLoading(false));
       });
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  };
 
   return (
     <div className="list-container">
       <h2>Beverages</h2>
-      {beverages.map((beverage) => (
+      {beverageData?.map((beverage) => (
         <div key={beverage._id}>
           <h3>{beverage.name}</h3>
           <p>{beverage.description}</p>
