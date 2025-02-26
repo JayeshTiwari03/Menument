@@ -3,6 +3,8 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 import "../FormStyles.css";
 
+const url = process.env.CONNECT_URL;
+
 const MenuItemForm = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -30,7 +32,7 @@ const MenuItemForm = () => {
     data.append("isAvailable", formData.isAvailable);
     data.append("photo", formData.photo);
 
-    await axios.post("http://localhost:5000/api/saveMenuItem", data);
+    await axios.post(`${url}/api/saveMenuItem`, data);
     alert("Menu item added!");
     navigate("/menu");
     setFormData({
@@ -45,9 +47,7 @@ const MenuItemForm = () => {
 
   const getCategories = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:5000/api/getCategories"
-      );
+      const response = await axios.get(`${url}/api/getCategories`);
       setCategories(response.data);
     } catch (error) {
       console.log("Error getting categories", error);
