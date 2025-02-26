@@ -8,7 +8,7 @@ import {
 import "../FormStyles.css";
 import "./CategoryList.css";
 
-const url = process.env.CONNECT_URL;
+const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
 const CategoryForm = ({
   isLoading,
@@ -30,7 +30,7 @@ const CategoryForm = ({
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      await axios.post(`${url}/api/saveCategory`, { name }).then((res) => {
+      await axios.post(`${apiUrl}/api/saveCategory`, { name }).then((res) => {
         setCategoryData([...categoryData, res.data]);
       });
       alert("Category added!");
@@ -43,7 +43,7 @@ const CategoryForm = ({
   const fetchCategories = async () => {
     setLoadingCategories(true);
     axios
-      .get(`${url}/api/getCategories`)
+      .get(`${apiUrl}/api/getCategories`)
       .then((res) => {
         // setCategories(res.data);
         setCategoryData(res.data);
@@ -58,7 +58,7 @@ const CategoryForm = ({
     }
 
     axios
-      .put(`${url}/api/editCategory`, {
+      .put(`${apiUrl}/api/editCategory`, {
         name: editedCategory,
         _id: id,
       })

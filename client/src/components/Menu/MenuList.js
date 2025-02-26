@@ -4,6 +4,8 @@ import { isLoading, setMenuData } from "../../store/slices/menuSlice";
 import axios from "axios";
 import "../ListStyles.css";
 
+const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
 const MenuList = () => {
   // const [menuItems, setMenuItems] = useState([]);
   const menuData = useSelector((state) => state.menu.apiData);
@@ -22,7 +24,7 @@ const MenuList = () => {
   const fetchMenuItems = () => {
     dispatch(isLoading(true));
     axios
-      .get("http://localhost:5000/api/getMenu")
+      .get(`${apiUrl}/api/getMenu`)
       .then((response) => {
         // setMenuItems(response.data);
         dispatch(setMenuData(response.data));
@@ -40,7 +42,7 @@ const MenuList = () => {
         {menuItems?.map((item) => (
           <div className="card" key={item._id}>
             <img
-              src={`http://localhost:5000/${item.photo}`}
+              src={`${apiUrl}/${item.photo}`}
               alt={item.name}
               width="100"
             />

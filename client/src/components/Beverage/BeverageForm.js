@@ -4,6 +4,8 @@ import { setBeverageData } from "../../store/slices/beveragesSlice";
 import { useDispatch } from "react-redux";
 import "../FormStyles.css";
 
+const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
 const BeverageForm = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -25,7 +27,7 @@ const BeverageForm = () => {
     data.append("photo", formData.photo);
 
     await axios
-      .post("http://localhost:5000/api/saveBeverage", data)
+      .post(`${apiUrl}/api/saveBeverage`, data)
       .then((response) => dispatch(setBeverageData(response.data)));
 
     alert("Beverage added!");

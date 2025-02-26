@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setBeverageData, isLoading } from "../../store/slices/beveragesSlice";
 import "../ListStyles.css";
 
+const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
 const BeverageList = () => {
   // const [beverages, setBeverages] = useState([]);
   const beverageData = useSelector((state) => state.beverage.apiData);
@@ -20,7 +22,7 @@ const BeverageList = () => {
   const fetchBeverageData = () => {
     dispatch(isLoading(true));
     try {
-      axios.get("http://localhost:5000/api/getBeverages").then((response) => {
+      axios.get(`${apiUrl}/api/getBeverages`).then((response) => {
         // setBeverages(response.data);
         dispatch(setBeverageData(response.data));
         dispatch(isLoading(false));
@@ -41,7 +43,7 @@ const BeverageList = () => {
             <p>Price: ${beverage.price}</p>
             <p>{beverage.isAlcoholic ? "Alcoholic" : "Non-Alcoholic"}</p>
             <img
-              src={`http://localhost:5000/${beverage.photo}`}
+              src={`${apiUrl}/${beverage.photo}`}
               alt={beverage.name}
               width="100"
             />
