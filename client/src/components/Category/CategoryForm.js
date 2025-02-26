@@ -8,6 +8,8 @@ import {
 import "../FormStyles.css";
 import "./CategoryList.css";
 
+const url = process.env.CONNECT_URL;
+
 const CategoryForm = ({
   isLoading,
   categoryData,
@@ -28,11 +30,9 @@ const CategoryForm = ({
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      await axios
-        .post("http://localhost:5000/api/saveCategory", { name })
-        .then((res) => {
-          setCategoryData([...categoryData, res.data]);
-        });
+      await axios.post(`${url}/api/saveCategory`, { name }).then((res) => {
+        setCategoryData([...categoryData, res.data]);
+      });
       alert("Category added!");
       setName("");
     } catch (error) {
@@ -43,7 +43,7 @@ const CategoryForm = ({
   const fetchCategories = async () => {
     setLoadingCategories(true);
     axios
-      .get("http://localhost:5000/api/getCategories")
+      .get(`${url}/api/getCategories`)
       .then((res) => {
         // setCategories(res.data);
         setCategoryData(res.data);
@@ -58,7 +58,7 @@ const CategoryForm = ({
     }
 
     axios
-      .put("http://localhost:5000/api/editCategory", {
+      .put(`${url}/api/editCategory`, {
         name: editedCategory,
         _id: id,
       })
