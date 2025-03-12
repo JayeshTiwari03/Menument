@@ -4,7 +4,8 @@ import { isLoading, setMenuData } from "../../store/slices/menuSlice";
 import axios from "axios";
 import "../ListStyles.css";
 
-const apiUrl = process.env.REACT_APP_API_BASE_URL;
+// const apiUrl = process.env.REACT_APP_API_BASE_URL;
+const apiUrl = "http://localhost:5000";
 
 const MenuList = () => {
   // const [menuItems, setMenuItems] = useState([]);

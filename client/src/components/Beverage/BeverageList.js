@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setBeverageData, isLoading } from "../../store/slices/beveragesSlice";
 import "../ListStyles.css";
 
-const apiUrl = process.env.REACT_APP_API_BASE_URL;
+// const apiUrl = process.env.REACT_APP_API_BASE_URL;
+const apiUrl = "http://localhost:5000";
 
 const BeverageList = () => {
   // const [beverages, setBeverages] = useState([]);

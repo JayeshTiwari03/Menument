@@ -15,6 +15,7 @@ const Navbar = () => {
         <Link to="/menu"><i className="fas fa-list"></i> Menu</Link>
         <Link to="/beverages"><i className="fas fa-glass-cheers"></i> Beverages</Link>
         <Link to="/recipes"><i className="fas fa-glass-cheers"></i> Recipes</Link>
+        <Link to="/login"><i className="fas fa-glass-cheers"></i> Login</Link>
       </div>
     </nav>
   );

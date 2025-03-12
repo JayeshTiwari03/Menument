@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 import "../FormStyles.css";
 
-const url = process.env.CONNECT_URL;
+// const url = process.env.REACT_APP_CONNECT_URL;
 
 const MenuItemForm = () => {
   const [formData, setFormData] = useState({

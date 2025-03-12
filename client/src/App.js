@@ -8,6 +8,7 @@ import MenuList from "./components/Menu/MenuList";
 import BeverageList from "./components/Beverage/BeverageList";
 import SearchRecipes from "./components/Recipes/SearchRecipes";
 import Footer from "./components/Footer/Footer";
+import Login from "./components/Login/Login";
 import "./App.css";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route path="/menu" element={<MenuList />} />
             <Route path="/beverages" element={<BeverageList />} />
             <Route path="/recipes" element={<SearchRecipes />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </div>
         <Footer />

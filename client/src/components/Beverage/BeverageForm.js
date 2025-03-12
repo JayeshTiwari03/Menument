@@ -4,7 +4,8 @@ import { setBeverageData } from "../../store/slices/beveragesSlice";
 import { useDispatch } from "react-redux";
 import "../FormStyles.css";
 
-const apiUrl = process.env.REACT_APP_API_BASE_URL;
+// const apiUrl = process.env.REACT_APP_API_BASE_URL;
+const apiUrl = "http://localhost:5000";
 
 const BeverageForm = () => {
   const [formData, setFormData] = useState({
@@ -15,7 +16,7 @@ const BeverageForm = () => {
     photo: null,
   });
   const dispatch = useDispatch();
-
+  console.log('apiUrl', apiUrl);
   const handleSubmit = async (e) => {
     e.preventDefault();
 

@@ -8,7 +8,8 @@ import {
 import "../FormStyles.css";
 import "./CategoryList.css";
 
-const apiUrl = process.env.REACT_APP_API_BASE_URL;
+// const apiUrl = process.env.REACT_APP_API_BASE_URL;
+const apiUrl = "http://localhost:5000";
 
 const CategoryForm = ({
   isLoading,
@@ -16,6 +17,8 @@ const CategoryForm = ({
   setCategoryData,
   setLoadingCategories,
 }) => {
+  console.log('apiUrl', apiUrl);
+
   const [name, setName] = useState("");
   // const [categories, setCategories] = useState([]);
   const [showInput, setShowInput] = useState({});
