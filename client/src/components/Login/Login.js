@@ -1,6 +1,6 @@
 import React from "react";
 import userAuthenticated from "../../authentication/userAuthenticated";
-import "./Login.css";
+import "./Login.scss";
 
 const Login = () => {
   const { isLoggedIn, email, handleEmailInput, login } = userAuthenticated();

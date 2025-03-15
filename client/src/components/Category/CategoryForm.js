@@ -17,7 +17,7 @@ const CategoryForm = ({
   setCategoryData,
   setLoadingCategories,
 }) => {
-  console.log('apiUrl', apiUrl);
+  console.log("apiUrl", apiUrl);
 
   const [name, setName] = useState("");
   // const [categories, setCategories] = useState([]);
@@ -91,43 +91,63 @@ const CategoryForm = ({
       </form>
       <div className="categories-list-container">
         <h2>Categories:</h2>
-        {categoryData?.map(({ _id, name }) => (
-          <div className="list-container" key={_id}>
-            {showInput?.[_id] ? (
-              <form>
-                <input
-                  type="text"
-                  placeholder="Category Name"
-                  onChange={(e) => setEditedCategory(e.target.value)}
-                  required
-                  value={editedCategory}
-                />
-                <button type="submit" onClick={() => handleEditCategory(_id)}>
-                  Save
-                </button>
-              </form>
-            ) : (
-              <div key={_id} className="category-list">
-                {name}
-              </div>
-            )}
-            <button
-              onClick={() =>
-                setShowInput((prev) => {
-                  if (!prev[_id]) {
-                    setEditedCategory(name);
-                  }
-                  return {
-                    ...prev,
-                    [_id]: !prev[_id],
-                  };
-                })
-              }
-            >
-              {showInput?.[_id] ? "Cancel" : "Edit"}
-            </button>
-          </div>
-        ))}
+        <div className="list-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Sr</th>
+                <th>Category</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {categoryData?.map(({ _id, name }, index) => (
+                <tr key={_id}>
+                  <td>{index + 1}</td>
+
+                  <td>
+                    {showInput?.[_id] ? (
+                      <form
+                        onSubmit={(e) => {
+                          e.preventDefault();
+                          handleEditCategory(_id);
+                        }}
+                      >
+                        <input
+                          type="text"
+                          placeholder="Category Name"
+                          onChange={(e) => setEditedCategory(e.target.value)}
+                          required
+                          value={editedCategory}
+                        />
+                        <button type="submit">Save</button>
+                      </form>
+                    ) : (
+                      name
+                    )}
+                  </td>
+                  <td>
+                    <button
+                      onClick={() =>
+                        setShowInput((prev) => {
+                          if (!prev[_id]) {
+                            setEditedCategory(name);
+                          }
+                          return {
+                            ...prev,
+                            [_id]: !prev[_id],
+                          };
+                        })
+                      }
+                    >
+                      {showInput?.[_id] ? "Cancel" : "Edit"}
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
