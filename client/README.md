@@ -1,78 +1,146 @@
-# Getting Started with Create React App
+# Menument Client
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This folder contains the **frontend client** of the Menument application. It is a modern React-based web application, bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and extended with a custom Webpack configuration for more granular control over the build process.
+
+---
+
+## Table of Contents
+
+- [Project Structure](#project-structure)
+- [Available Scripts](#available-scripts)
+- [Development Setup](#development-setup)
+- [Environment Variables](#environment-variables)
+- [Dependencies](#dependencies)
+- [Customization](#customization)
+- [Accessibility & TODOs](#accessibility--todos)
+- [Learn More](#learn-more)
+
+---
+
+## Project Structure
+
+```
+client/
+│
+├── .babelrc              # Babel configuration for ES6+ and React
+├── .env                  # Environment variables for the client
+├── .gitignore            # Git ignore rules for node_modules, build, etc.
+├── README.md             # This documentation file
+├── package.json          # Project metadata, scripts, and dependencies
+├── package-lock.json     # Exact dependency versions
+├── public/               # Static assets (favicon, index.html, etc.)
+├── src/                  # Main React application source code
+└── webpack.config.js     # Custom Webpack configuration
+```
+
+---
 
 ## Available Scripts
 
-In the project directory, you can run:
+In the `client` directory, you can run:
 
-### `npm start`
+- **`npm start`**  
+  Starts the app in development mode using Webpack Dev Server.  
+  Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **`npm test`**  
+  Runs the test suite in interactive watch mode.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **`npm run build`**  
+  Builds the app for production to the `build/` folder, minifying files and optimizing performance.
 
-### `npm test`
+- **`npm run eject`**  
+  Exposes the Create React App configuration. **This is irreversible!**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **`npm run clean`**  
+  Removes the `dist/` directory (useful for cleaning up build artifacts).
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Development Setup
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. **Install dependencies:**
+   ```bash
+   cd client
+   npm install
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. **Create a `.env` file:**
+   - Copy `.env.example` if available, or create a new `.env` file for environment-specific values (API endpoints, feature flags, etc).
 
-### `npm run eject`
+3. **Start the development server:**
+   ```bash
+   npm start
+   ```
+   The client will proxy API requests to `http://localhost:5000` (configured in `package.json`).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4. **Build for production:**
+   ```bash
+   npm run build
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Environment Variables
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Add your custom environment variables in the `.env` file.
+- Typical variables include API URLs, feature flags, analytics keys, etc.
+- **Note:** Never commit sensitive secrets to this file.
+
+---
+
+## Dependencies
+
+- **Core:**  
+  `react`, `react-dom`, `react-router-dom`, `redux`, `@reduxjs/toolkit`, `axios`
+- **Dev tools:**  
+  `webpack`, `babel`, `sass`, `eslint`, `style-loader`, `css-loader`
+- **Testing:**  
+  Integrated via Create React App (`react-scripts test`).
+
+See [`package.json`](./package.json) for the full list.
+
+---
+
+## Customization
+
+- **Webpack:**  
+  The project uses a custom `webpack.config.js` for advanced bundling, code splitting, and asset management.
+
+- **Babel:**  
+  Configured via `.babelrc` to support the latest JavaScript and React features.
+
+- **Linting:**  
+  ESLint is set up with React and Jest presets.
+
+---
+
+## Accessibility & TODOs
+
+This project is actively developed. Notable TODOs and enhancement ideas:
+
+- Add a custom React hook
+- Improve keyboard navigation for autocomplete options (accessibility)
+- Explore use of Higher Order Components (HOCs)
+- Complete the "Edit Category" feature (toggle input/prompt for editing, connect to API)
+
+---
 
 ## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [Create React App Documentation](https://facebook.github.io/create-react-app/docs/getting-started)
+- [React Documentation](https://reactjs.org/)
+- [Webpack Documentation](https://webpack.js.org/concepts/)
+- [Redux Toolkit](https://redux-toolkit.js.org/introduction/getting-started)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+This project is licensed under the ISC License.
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Author
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-// TODO:
-// Add a custom hook
-// Add keyboard navigation for autocomplete options ACCESSIBILITY
-// Explore HOC
-// Make the Edit Category Work
-    // Try toggling to an input when user clicks on edit button next to category name - or use promt box first to test
-    // Put the data to the API
+[JayeshTiwari03](https://github.com/JayeshTiwari03)
